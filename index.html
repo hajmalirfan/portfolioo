@@ -740,27 +740,23 @@
           </div>
 
           <!-- Contact Form -->
-          <form class="contact-form glass-panel reveal" id="contactForm" novalidate aria-label="Contact form">
+          <form action="https://formspree.io/f/mykqoeyo" method="POST" class="contact-form glass-panel reveal" id="contactForm" aria-label="Contact form">
             <div class="form-group">
               <label for="contactName">Name <span aria-hidden="true">*</span></label>
               <input type="text" id="contactName" name="name" placeholder="Your full name" required autocomplete="name" aria-required="true" />
-              <span class="form-error" id="nameError" role="alert" aria-live="polite"></span>
             </div>
             <div class="form-group">
               <label for="contactEmail">Email <span aria-hidden="true">*</span></label>
               <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required autocomplete="email" aria-required="true" />
-              <span class="form-error" id="emailError" role="alert" aria-live="polite"></span>
             </div>
             <div class="form-group">
               <label for="contactMessage">Message <span aria-hidden="true">*</span></label>
               <textarea id="contactMessage" name="message" placeholder="Tell me about your opportunity or project..." rows="5" required aria-required="true"></textarea>
-              <span class="form-error" id="messageError" role="alert" aria-live="polite"></span>
             </div>
-            <button type="submit" class="btn btn-primary btn-full" id="submitBtn" aria-label="Send message">
+            <button type="submit" class="btn btn-primary btn-full" aria-label="Send message">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               Send Message
             </button>
-            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
           </form>
         </div>
       </div>
