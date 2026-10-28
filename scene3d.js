@@ -50,7 +50,6 @@ function init() {
   });
 
   // ---- objects -------------------------------------------------------
-  const pastel = [0x059669, 0x34d399, 0x10b981];
   const mat = (color, extra = {}) => new THREE.MeshPhysicalMaterial({
     color, roughness: 0.18, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.1,
     iridescence: 1, iridescenceIOR: 1.4, envMapIntensity: 1.2, ...extra
@@ -75,21 +74,9 @@ function init() {
   // Supporting shapes scattered down the page
   add(new THREE.Mesh(new THREE.IcosahedronGeometry(1, 0), mat(0x059669, { wireframe: true, iridescence: 0 })), 0.06, 900, 0.8, [0.2, 0.3, 0.1], 0.9);
   add(new THREE.Mesh(new THREE.TorusGeometry(1, 0.32, 32, 80), mat(0x0f172a, { wireframe: true, iridescence: 0 })), 0.93, 1500, 0.7, [0.3, 0.1, 0.2], 0.8);
-  add(new THREE.Mesh(new THREE.OctahedronGeometry(1, 0), mat(0x10b981, { wireframe: true, iridescence: 0 })), 0.05, 2300, 0.85, [0.25, 0.35, 0], 0.75);
-  add(new THREE.Mesh(new THREE.SphereGeometry(1, 64, 64), mat(0x0f172a, { roughness: 0.05 })), 0.95, 3000, 0.6, [0.05, 0.1, 0], 0.85);
   add(new THREE.Mesh(new THREE.TorusKnotGeometry(0.8, 0.22, 140, 24), mat(0x059669, { wireframe: true, iridescence: 0 })), 0.07, 3700, 0.75, [0.2, 0.2, 0.1], 0.8);
-  add(new THREE.Mesh(new THREE.DodecahedronGeometry(1, 0), mat(0x0f172a, { wireframe: true, iridescence: 0 })), 0.94, 4400, 0.8, [0.25, 0.15, 0.2], 0.7);
   add(new THREE.Mesh(new THREE.IcosahedronGeometry(1, 1), mat(0x059669, { wireframe: true, iridescence: 0 })), 0.08, 5200, 0.9, [0.1, 0.25, 0], 1.0);
   add(new THREE.Mesh(new THREE.TorusGeometry(1, 0.25, 32, 80), mat(0x10b981, { wireframe: true, iridescence: 0 })), 0.92, 6000, 0.7, [0.3, 0.2, 0.1], 0.75);
-  add(new THREE.Mesh(new THREE.OctahedronGeometry(1, 0), mat(0x0f172a, { wireframe: true, iridescence: 0 })), 0.06, 6800, 0.8, [0.2, 0.3, 0.1], 0.7);
-  add(new THREE.Mesh(new THREE.SphereGeometry(1, 48, 48), mat(0x059669, { roughness: 0.05 })), 0.94, 7600, 0.65, [0.1, 0.1, 0], 0.7);
-
-  // Tiny floating spheres for depth
-  const tinyGeo = new THREE.SphereGeometry(1, 24, 24);
-  for (let i = 0; i < 18; i++) {
-    const m = new THREE.Mesh(tinyGeo, mat(pastel[i % pastel.length], { roughness: 0.1 }));
-    add(m, Math.random() < 0.5 ? Math.random() * 0.1 : 0.9 + Math.random() * 0.1, 200 + Math.random() * 8000, 0.4 + Math.random() * 0.9, [0.1, 0.1, 0], 0.08 + Math.random() * 0.16);
-  }
 
   // Particle dust
   const N = 420;
