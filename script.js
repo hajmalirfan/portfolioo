@@ -363,28 +363,6 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ════════════════════════════════════════════
      12. CARD HOVER GLOW — dynamic border glow on hover
      ════════════════════════════════════════════ */
-  const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
-                  !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (canTilt) {
-    document.querySelectorAll('.glass-panel:not(.terminal-card)').forEach(function (card) {
-      card.addEventListener('pointermove', function (e) {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width;
-        const py = (e.clientY - r.top) / r.height;
-        card.classList.remove('tilt-reset');
-        card.classList.add('tilting');
-        card.style.setProperty('--gx', (px * 100) + '%');
-        card.style.setProperty('--gy', (py * 100) + '%');
-        card.style.transform = 'perspective(900px) rotateX(' + ((0.5 - py) * 9) + 'deg) rotateY(' + ((px - 0.5) * 11) + 'deg) translateY(-4px) scale3d(1.015,1.015,1.015)';
-      });
-      card.addEventListener('pointerleave', function () {
-        card.classList.remove('tilting');
-        card.classList.add('tilt-reset');
-        card.style.transform = '';
-      });
-    });
-  }
-
   /* Scroll progress bar */
   const progress = document.getElementById('progress');
   if (progress) {
