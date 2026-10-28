@@ -72,11 +72,6 @@ function init() {
   const hero = add(new THREE.Mesh(new THREE.TorusKnotGeometry(1, 0.34, 220, 36, 2, 3), heroMat), 0.72, 380, 1, [0.1, 0.18, 0], 1.25);
 
   // Supporting shapes scattered down the page
-  add(new THREE.Mesh(new THREE.IcosahedronGeometry(1, 0), mat(0x059669, { wireframe: true, iridescence: 0 })), 0.06, 900, 0.8, [0.2, 0.3, 0.1], 0.9);
-  add(new THREE.Mesh(new THREE.TorusGeometry(1, 0.32, 32, 80), mat(0x0f172a, { wireframe: true, iridescence: 0 })), 0.93, 1500, 0.7, [0.3, 0.1, 0.2], 0.8);
-  add(new THREE.Mesh(new THREE.TorusKnotGeometry(0.8, 0.22, 140, 24), mat(0x059669, { wireframe: true, iridescence: 0 })), 0.07, 3700, 0.75, [0.2, 0.2, 0.1], 0.8);
-  add(new THREE.Mesh(new THREE.IcosahedronGeometry(1, 1), mat(0x059669, { wireframe: true, iridescence: 0 })), 0.08, 5200, 0.9, [0.1, 0.25, 0], 1.0);
-  add(new THREE.Mesh(new THREE.TorusGeometry(1, 0.25, 32, 80), mat(0x10b981, { wireframe: true, iridescence: 0 })), 0.92, 6000, 0.7, [0.3, 0.2, 0.1], 0.75);
 
   // Particle dust
   const N = 420;
