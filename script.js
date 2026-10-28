@@ -10,7 +10,7 @@
    1. THEME TOGGLE  (persisted in localStorage)
    ════════════════════════════════════════════ */
 (function initTheme() {
-  const saved = localStorage.getItem('mhi-theme') || 'dark';
+  const saved = localStorage.getItem('mhi-theme-v2') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
   document.body.setAttribute('data-theme', saved);
 })();
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const next = current === 'dark' ? 'light' : 'dark';
       document.body.setAttribute('data-theme', next);
       document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('mhi-theme', next);
+      localStorage.setItem('mhi-theme-v2', next);
     });
   }
 
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const typewriterEl = document.getElementById('typewriter');
   const roles = [
     'Cybersecurity Analyst (Student)',
-    'Frontend Developer',
+    'Web Application Developer',
     'UI/UX Designer',
     'Penetration Testing Enthusiast'
   ];
@@ -363,14 +363,38 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ════════════════════════════════════════════
      12. CARD HOVER GLOW — dynamic border glow on hover
      ════════════════════════════════════════════ */
-  document.querySelectorAll('.glass-panel').forEach(function (card) {
-    card.addEventListener('mouseenter', function () {
-      this.style.boxShadow = 'var(--glass-shadow), 0 0 20px var(--cyan-glow-sm)';
+  const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+                  !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (canTilt) {
+    document.querySelectorAll('.glass-panel:not(.terminal-card)').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        card.classList.remove('tilt-reset');
+        card.classList.add('tilting');
+        card.style.setProperty('--gx', (px * 100) + '%');
+        card.style.setProperty('--gy', (py * 100) + '%');
+        card.style.transform = 'perspective(900px) rotateX(' + ((0.5 - py) * 9) + 'deg) rotateY(' + ((px - 0.5) * 11) + 'deg) translateY(-4px) scale3d(1.015,1.015,1.015)';
+      });
+      card.addEventListener('pointerleave', function () {
+        card.classList.remove('tilting');
+        card.classList.add('tilt-reset');
+        card.style.transform = '';
+      });
     });
-    card.addEventListener('mouseleave', function () {
-      this.style.boxShadow = '';
-    });
-  });
+  }
+
+  /* Scroll progress bar */
+  const progress = document.getElementById('progress');
+  if (progress) {
+    const upd = function () {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+    };
+    window.addEventListener('scroll', upd, { passive: true });
+    upd();
+  }
 
   /* ════════════════════════════════════════════
      13. LANGUAGE BAR – trigger on section enter

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,12 +19,17 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="theme3d.css" />
+  <link rel="stylesheet" href="subfinder.css" />
 </head>
-<body data-theme="dark">
+<body data-theme="light">
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div id="progress" aria-hidden="true"></div>
+
 
   <!-- ========== NAVBAR ========== -->
   <nav id="navbar" role="navigation" aria-label="Primary navigation">
@@ -37,6 +42,7 @@
       <li><a href="#projects" class="nav-link">Projects</a></li>
       <li><a href="#hackathons" class="nav-link">Hackathons</a></li>
       <li><a href="#security" class="nav-link">Security</a></li>
+      <li><a href="#subfinder" class="nav-link">Subfinder</a></li>
       <li><a href="#achievements" class="nav-link">Achievements</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
@@ -74,6 +80,7 @@
       <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
       <li><a href="#hackathons" class="mobile-nav-link">Hackathons</a></li>
       <li><a href="#security" class="mobile-nav-link">Security</a></li>
+      <li><a href="#subfinder" class="mobile-nav-link">Subfinder</a></li>
       <li><a href="#achievements" class="mobile-nav-link">Achievements</a></li>
       <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
       <li><a href="resume.pdf" target="_blank" class="mobile-nav-link mobile-nav-resume">Resume ↗</a></li>
@@ -148,6 +155,7 @@
           <div class="terminal-body" id="terminalBody" aria-hidden="true"></div>
         </div>
       </div>
+      <span class="scroll-cue" aria-hidden="true"></span>
     </section>
 
     <!-- ========== ABOUT ========== -->
@@ -675,6 +683,42 @@
       </div>
     </section>
 
+    <!-- ========== SUBDOMAIN FINDER ========== -->
+    <section id="subfinder" class="section section-alt" aria-label="Subdomain Finder">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-label">LIVE TOOL</span>
+          <h2 class="section-title">Subdomain Finder</h2>
+          <p class="section-sub">Enter a website URL or domain to discover its subdomains from certificate transparency logs and DNS. Passive recon only: nothing is sent to the target.</p>
+        </div>
+
+        <div class="sf-panel glass-panel reveal">
+          <form id="sfForm" class="sf-form" novalidate>
+            <label for="sfInput" class="sf-prompt">$ subfinder -d</label>
+            <input id="sfInput" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com or https://example.com/path" aria-label="Website URL or domain" />
+            <button id="sfBtn" type="submit" class="btn btn-primary">Find subdomains</button>
+          </form>
+          <p id="sfStatus" class="sf-status" role="status" aria-live="polite">Only scan domains you own or are authorised to test.</p>
+          <div class="sf-progress" aria-hidden="true"><span id="sfBar"></span></div>
+
+          <div id="sfResults" hidden>
+            <div class="sf-toolbar">
+              <strong id="sfCount">0 found</strong>
+              <input id="sfFilter" type="search" placeholder="Filter results" aria-label="Filter results" />
+              <button type="button" id="sfCopy" class="btn btn-outline">Copy list</button>
+              <button type="button" id="sfCsv" class="btn btn-outline">Export CSV</button>
+            </div>
+            <div class="sf-table-wrap">
+              <table class="sf-table">
+                <thead><tr><th>Subdomain</th><th>IPv4</th><th>Source</th></tr></thead>
+                <tbody id="sfRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== ACHIEVEMENTS ========== -->
     <section id="achievements" class="section section-alt" aria-label="Achievements and Awards">
       <div class="section-inner">
@@ -881,7 +925,17 @@
     </div>
   </footer>
 
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="scene3d.js"></script>
   <script src="script.js"></script>
+  <script src="subfinder.js"></script>
   <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 </body>
 </html>
